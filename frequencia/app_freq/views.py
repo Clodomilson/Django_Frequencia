@@ -1,7 +1,7 @@
 # app_freq/views.py
 from django.shortcuts import render, redirect
-from .models import Frequencia, Aluno
-from .forms import FrequenciaForm, LoginForm, AlunoForm
+from .models import Frequencia, Aluno, Curso
+from .forms import FrequenciaForm, LoginForm, AlunoForm, CursoForm
 
 def formulario(request):
     form = LoginForm(request.POST or None)
@@ -38,3 +38,16 @@ def frequencia(request):
             frequencias = Frequencia.objects.filter(matricula=matricula)
 
     return render(request, 'app_freq/frequencia.html', {'nome': nome, 'frequencias': frequencias, 'form': form})
+
+def curso(request):
+    if request.method == 'POST':
+        form = CursoForm(request.POST)
+        if form.is_valid():
+            nome_curso = form.cleaned_data['curso']
+            # Cria uma nova instância do modelo Curso e salva no banco de dados
+            Curso.objects.create(nome=nome_curso)
+            return redirect('alguma_url_de_sucesso')  # Redirecione para outra página após o salvamento
+    else:
+        form = CursoForm()
+
+    return render(request, 'formulario.html', {'form': form})

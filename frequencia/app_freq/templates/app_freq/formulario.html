@@ -20,11 +20,16 @@
             <h2>Registre sua Frequencia</h2>
             {{ form.as_p }}
             <label for="{{ form.curso.id_for_label }}">Curso:</label>
-            <select name="{{ form.curso.name }}" class="{{ form.curso.widget.attrs.class }}">
+            <select id="id_curso" name="curso">
+                {% for value, text in form.curso.field.choices %}
+                    <option value="{{ value }}">{{ text }}</option>
+                {% endfor %}
+            </select>
+            <!-- <select name="{{ form.curso.name }}" class="{{ form.curso.widget.attrs.class }}">
                 {% for value, label in form.curso.field.choices %}
                     <option value="{{ value }}" {% if form.curso.value == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}
-            </select>
+            </select> -->
             <br><br>
             <input type="submit" value="Registrar Frequência">
         </form>

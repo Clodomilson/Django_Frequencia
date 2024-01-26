@@ -3,12 +3,12 @@ from django import forms
 from .models import Aluno
 
 
-
-CURSO_CHOICES = [
+class CursoForm(forms.Form):
+    CURSO_CHOICES = [
     ('Programador de Sistemas', 'Programador de Sistemas'),
     ('Adm.Banco de Dados', 'Adm.Banco de Dados'),
     ('Programador Web', 'Programador Web'),
-]
+    ]
 
 class FrequenciaForm(forms.Form):
     matricula = forms.CharField(max_length=255)

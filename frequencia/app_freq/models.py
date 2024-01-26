@@ -10,3 +10,6 @@ class Frequencia(models.Model):
     data = models.DateField()
     hora = models.TimeField()
     curso = models.CharField(max_length=255)
+
+class Curso(models.Model):
+    nome = models.CharField(max_length=100)
