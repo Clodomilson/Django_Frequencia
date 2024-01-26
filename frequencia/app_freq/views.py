@@ -42,3 +42,33 @@ def frequencia(request):
     # return render(request, 'app_freq/frequencia.html', {'nome': nome, 'frequencias': frequencias, 'form': form})
     return render(request, 'app_freq/formulario.html', {'form': form})
 
+def cadastro(request):
+    if request.method == 'POST':
+        form = AlunoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cadastro realizado com sucesso!')
+            return redirect('url_para_login')  # Substitua com a URL para a página de login
+    else:
+        form = AlunoForm()
+
+    return render(request, 'app_freq/cadastro.html', {'form': form})
+
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            matricula = form.cleaned_data['matricula']
+            senha = form.cleaned_data['senha']
+            user = authenticate(request, username=matricula, password=senha)
+            if user is not None:
+                login(request, user)
+                return redirect('url_para_registro_frequencia')  # Substitua com a URL para registro de frequência
+            else:
+                messages.error(request, 'Matrícula ou senha incorretos')
+    else:
+        form = LoginForm()
+
+    return render(request, 'app_freq/login.html', {'form': form})
+

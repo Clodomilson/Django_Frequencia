@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    
+    <title>Registro de Frequência</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Frequencia SENAC 4.0</h1>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <img src="{% static 'senac.png' %}">
+        <h1>Cadastro de Alunos</h1>
+        <form method="post" action="{% url 'cadastro' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Cadastrar">
+        </form>
+    </div>
+</body>
+</html>

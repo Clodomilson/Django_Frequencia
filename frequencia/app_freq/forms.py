@@ -1,6 +1,8 @@
 # app_freq/forms.py
 from django import forms
 from .models import Aluno
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 class FrequenciaForm(forms.Form):
     CURSO_CHOICES = [
