@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'style_frequencia.css' %}">
+    <title>Registro de Frequência</title>
+</head>
+<body>
+    <h1>Frequencia Cadastrada Com Sucesso <br /> Aluno(a): - {{ nome }}</h1>
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Curso</th>
+        </tr>
+        {% for frequencia in frequencias %}
+        <tr>
+            <td>{{ frequencia.data }}</td>
+            <td>{{ frequencia.hora }}</td>
+            <td>{{ frequencia.curso }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

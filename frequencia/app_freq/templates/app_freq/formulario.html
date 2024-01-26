@@ -1,0 +1,35 @@
+<!-- templates/app_freq/formulario.html -->
+ <!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    
+    <title>Registro de Frequência</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Frequencia SENAC 4.0</h1>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <img src="{% static 'senac.png' %}">
+        <form method="post" action="{% url 'frequencia' %}">
+            {% csrf_token %}
+            <h2>Registre sua Frequencia</h2>
+            {{ form.as_p }}
+            <label for="{{ form.curso.id_for_label }}">Curso:</label>
+            <select name="{{ form.curso.name }}" class="{{ form.curso.widget.attrs.class }}">
+                {% for value, label in form.curso.field.choices %}
+                    <option value="{{ value }}" {% if form.curso.value == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input type="submit" value="Registrar Frequência">
+        </form>
+    </div>
+</body>
+</html>
+
+
