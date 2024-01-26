@@ -1,5 +1,5 @@
 <!-- templates/app_freq/formulario.html -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     {% load static %}
@@ -15,26 +15,32 @@
         <p style="color: red;">{{ error }}</p>
         {% endif %}
         <img src="{% static 'senac.png' %}">
-        <form method="post" action="{% url 'frequencia' %}">
+        <form method="post" action="{% url 'formulario' %}">
             {% csrf_token %}
-            <h2>Registre sua Frequencia</h2>
-            {{ form.as_p }}
-            <label for="{{ form.curso.id_for_label }}">Curso:</label>
-            <select id="id_curso" name="curso">
-                {% for value, text in form.curso.field.choices %}
-                    <option value="{{ value }}">{{ text }}</option>
-                {% endfor %}
-            </select>
-            <!-- <select name="{{ form.curso.name }}" class="{{ form.curso.widget.attrs.class }}">
-                {% for value, label in form.curso.field.choices %}
-                    <option value="{{ value }}" {% if form.curso.value == value %}selected{% endif %}>{{ label }}</option>
-                {% endfor %}
-            </select> -->
-            <br><br>
+            <h2>Registre sua Frequência</h2>
+
+            <div>
+                <label for="{{ form.matricula.id_for_label }}">Matrícula:</label>
+                {{ form.matricula }}
+            </div>
+
+            <div>
+                <label for="{{ form.senha.id_for_label }}">Senha:</label>
+                {{ form.senha }}
+            </div>
+
+            <div>
+                <label for="{{ form.curso.id_for_label }}">Curso:</label>
+                <select id="{{ form.curso.id_for_label }}" name="{{ form.curso.html_name }}">
+                    {% for value, text in form.curso.field.choices %}
+                        <option value="{{ value }}">{{ text }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <br>
             <input type="submit" value="Registrar Frequência">
         </form>
     </div>
 </body>
 </html>
-
-
