@@ -48,7 +48,7 @@ def cadastro(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Cadastro realizado com sucesso!')
-            return redirect('url_para_login')  # Substitua com a URL para a página de login
+            return redirect(reverse('login'))  # Substitua com a URL para a página de login
     else:
         form = AlunoForm()
 
@@ -64,7 +64,7 @@ def login(request):
             user = authenticate(request, username=matricula, password=senha)
             if user is not None:
                 login(request, user)
-                return redirect('url_para_registro_frequencia')  # Substitua com a URL para registro de frequência
+                return redirect('frequencia')  # Substitua com a URL para registro de frequência
             else:
                 messages.error(request, 'Matrícula ou senha incorretos')
     else:
