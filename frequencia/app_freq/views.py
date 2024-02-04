@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate  # Adicione esta linha
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
+from django.urls import reverse
 from .models import Frequencia, Aluno
 from .forms import FrequenciaForm, LoginForm, AlunoForm
 
@@ -59,18 +60,27 @@ def cadastro(request):
 
     return render(request, 'app_freq/cadastro.html', {'form': form})
 
-
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             matricula = form.cleaned_data['matricula']
             senha = form.cleaned_data['senha']
+
+            # Adicione instrução de impressão para verificar as credenciais
+            print(f"Tentativa de login com matrícula: {matricula} e senha: {senha}")
+
+
             user = authenticate(request, username=matricula, password=senha)
             if user is not None:
-                login(request, user)
+                # Adicione instrução de impressão para confirmar autenticação bem-sucedida
+                print(f"Usuário autenticado com sucesso: {user.username}")
+
+                auth_login(request, user)
                 return redirect('formulario')  # Substitua com a URL para registro de frequência
             else:
+                # Adicione instrução de impressão para indicar falha na autenticação
+                print("Falha na autenticação. Matrícula ou senha incorretas.")
                 messages.error(request, 'Matrícula ou senha incorretos')
     else:
         form = LoginForm()
