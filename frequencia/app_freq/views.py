@@ -1,5 +1,9 @@
 # app_freq/views.py
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate  # Adicione esta linha
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login as auth_login
+from django.contrib import messages
 from .models import Frequencia, Aluno
 from .forms import FrequenciaForm, LoginForm, AlunoForm
 
@@ -65,7 +69,7 @@ def login(request):
             user = authenticate(request, username=matricula, password=senha)
             if user is not None:
                 login(request, user)
-                return redirect('frequencia')  # Substitua com a URL para registro de frequência
+                return redirect('formulario')  # Substitua com a URL para registro de frequência
             else:
                 messages.error(request, 'Matrícula ou senha incorretos')
     else:

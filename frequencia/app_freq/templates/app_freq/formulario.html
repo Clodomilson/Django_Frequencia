@@ -42,8 +42,5 @@
             <input type="submit" value="Registrar Frequência">
         </form>
     </div>
-    <p>Já tem uma conta? {% if user.is_authenticated %}<a href="{% url 'login' %}">Faça o login</a>.</p>
-       
-    <p>Ainda não tem uma conta? {% if user.is_authenticated %}<a href="{% url 'cadastro' %}">Cadastre-se</a>.</p>
 </body>
 </html>
