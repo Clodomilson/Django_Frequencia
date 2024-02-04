@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Frequencia, Aluno
 from .forms import FrequenciaForm, LoginForm, AlunoForm
 
+@login_required
 def formulario(request):
     form = FrequenciaForm(request.POST or None)
     error = None
@@ -21,7 +22,7 @@ def formulario(request):
         else:
             error = "Matrícula e/ou senha incorretas"
 
-    return render(request, 'app_freq/formulario.html', {'form': form, 'error': error})
+    return render(request, 'app_freq/formulario.html', {'form': form, 'error': error, 'user': request.user})
 
 def frequencia(request):
     form = FrequenciaForm(request.POST or None)
